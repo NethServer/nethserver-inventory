@@ -33,4 +33,4 @@ script: >
     -e SECRET_URL
     -e AUTOBUILD_SECRET
     -e AUTOBUILD_SECRET_URL
-    nethserver/build uploadrpms-travis
+    nethserver/build bash -x uploadrpms-travis
