@@ -6,7 +6,7 @@
 Facter.add('templates_custom') do
     confine osfamily: 'RedHat'
     setcode do
-        tmp = Facter::Core::Execution.exec('find /etc/e-smith/templates-custom -type f | wc -l')
-        tmp.to_i
+        out = Facter::Core::Execution.exec('find /etc/e-smith/templates-custom -type f -printf "%h\n" | sed s:^/etc/e-smith/templates-custom:: | sort | uniq')
+        out.strip.split(/\n/)
     end
 end
