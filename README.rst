@@ -52,8 +52,8 @@ To configure execute: ::
   signal-event nethserver-inventory-update
 
 
-Nethesis Enterprise subscriptions
----------------------------------
+Nethesis partner program
+------------------------
 
 URL: https://my.nethesis.it/isa/inventory/store
 
