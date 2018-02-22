@@ -10,7 +10,7 @@ Facter.add('backup') do
             if FileTest.exists?(log_file)
                 backup['last'] = {}
                 backup['last']['type'] = Facter::Core::Execution.exec('/sbin/e-smith/config getprop backup-data VFSType')
-                File.open(log_file, 'r:UTF-8') do |f|
+                File.open(log_file, 'rb') do |f|
                     while line = f.gets
                         backup['last']['start'] = Regexp.last_match(1) if line =~ /^StartTime\s(\d+)/
                         backup['last']['end'] = Regexp.last_match(1) if line =~ /^EndTime\s(\d+)/
