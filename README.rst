@@ -44,11 +44,11 @@ Make sure that ``SystemId`` property under ``subscription`` key is already set.
 NethServer Enterprise subscrptions
 ----------------------------------
 
-URL: https://my.nethserver.com/api/inventories
+URL: https://my.nethserver.com/api/machine/inventories
 
 To configure execute: ::
 
-  config setprop subscription InventoryUrl https://my.nethserver.com/api/inventories/store
+  config setprop subscription InventoryUrl https://my.nethserver.com/api/machine/inventories/store
   signal-event nethserver-inventory-update
 
 

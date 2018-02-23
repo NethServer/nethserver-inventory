@@ -29,16 +29,17 @@ function exit_error {
 }
 
 function print_help {
-    echo "Usage: $0 [-u <url>] [-j <json_file>] [-s <systemid>] [-d] [-h]"
+    echo "Usage: $0 [-u <url>] [-j <json_file>] [-s <systemid>] [-k <secret_key>] [-d] [-h]"
     echo "  -u send data to given URL"
     echo "  -j read data from given file in JSON format"
-    echo "  -s use given System ID"
+    echo "  -s System ID"
+    echo "  -k secret key (optional)"
     echo "  -d enable debug"
     echo "  -h show this help"
     exit 0
 }
 
-while getopts ":u:j:s:hd" opt; do
+while getopts ":u:j:s:k:hd" opt; do
   case $opt in
     u)
       url=$OPTARG
@@ -48,6 +49,9 @@ while getopts ":u:j:s:hd" opt; do
       ;;
     s)
       systemid=$OPTARG
+      ;;
+    k)
+      secret=$OPTARG
       ;;
     h)
       print_help
@@ -75,6 +79,12 @@ if [ "x$systemid" = "x" ]; then
     exit_error "Invalid System ID"
 fi
 
+if [ "x$secret" != "x" ]; then
+    auth="--header \"Authorization: token $secret\""
+else
+    auth=""
+fi
+
 if [ "x$json" = "x" ]; then
     json=`/opt/puppetlabs/puppet/bin/facter -j`
 else
@@ -91,8 +101,8 @@ trap "{ rm -f $TMP; }" SIGINT SIGTERM EXIT
 
 echo "{\"data\": {\"lk\": \"$systemid\", \"data\": $json}}" > $TMP
 
-code=`/usr/bin/curl $debug -L --header "SystemID: $systemid" -w "%{http_code}" -X POST \
-   --header "Content-Type: application/json" --header "Accept: application/json"  \
+code=`/usr/bin/curl $debug -L -w "%{http_code}" -X POST \
+   $auth --header "Content-Type: application/json" --header "Accept: application/json"  \
    --data-binary @$TMP \
    $url`
 
