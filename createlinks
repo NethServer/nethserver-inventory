@@ -34,10 +34,6 @@ event_actions('nethserver-inventory-update', qw(
 # nethserver-subscription-save event
 #
 
-event_templates('nethserver-subscription-save', qw(
-    /etc/cron.daily/nethserver-inventory
-));
-
 event_actions('nethserver-subscription-save', qw(
     nethserver-inventory-send        30
 ));
