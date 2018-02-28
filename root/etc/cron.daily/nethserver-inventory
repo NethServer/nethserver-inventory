@@ -22,7 +22,7 @@
 
 # Send the inventory
 
-SECRET=$(/sbin/e-smith/config getprop subscription SystemId)
+SECRET=$(/sbin/e-smith/config getprop subscription Secret)
 
 if [ ! -z $SECRET ]; then
     SECRET="-k $SECRET"
