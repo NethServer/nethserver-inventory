@@ -28,7 +28,7 @@ Sending the inventory
 The inventory will be sent every day using cron.
 If you want to manually send the inventory, use the following command: ::
 
-  nethserver-inventory -u <URL> -s <SystemId>  
+  /etc/cron.daily/nethserver-inventory
 
 Configuration
 =============
@@ -40,9 +40,10 @@ Properties:
 - ``InventoryUrl``: API endpoint where the data are sent
 
 Make sure that ``SystemId`` property under ``subscription`` key is already set.
+If the ``Secret`` property is set, it will be used as authorization token when sending the inventory.
 
-NethServer Enterprise subscrptions
-----------------------------------
+NethServer subscrptions
+-----------------------
 
 URL: https://my.nethserver.com/api/machine/inventories
 
