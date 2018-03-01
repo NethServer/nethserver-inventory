@@ -79,12 +79,6 @@ if [ "x$systemid" = "x" ]; then
     exit_error "Invalid System ID"
 fi
 
-if [ "x$secret" != "x" ]; then
-    auth="--header \"Authorization: token $secret\""
-else
-    auth=""
-fi
-
 if [ "x$json" = "x" ]; then
     json=`/opt/puppetlabs/puppet/bin/facter -j`
 else
@@ -102,7 +96,7 @@ trap "{ rm -f $TMP; }" SIGINT SIGTERM EXIT
 echo "{\"data\": {\"lk\": \"$systemid\", \"data\": $json}}" > $TMP
 
 code=`/usr/bin/curl $debug -L -w "%{http_code}" -X POST \
-   $auth --header "Content-Type: application/json" --header "Accept: application/json"  \
+   --header "Authorization: token $secret" $auth --header "Content-Type: application/json" --header "Accept: application/json"  \
    --data-binary @$TMP \
    $url`
 
