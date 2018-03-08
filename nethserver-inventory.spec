@@ -7,6 +7,7 @@ Source0: %{name}-%{version}.tar.gz
 BuildArch: noarch
 
 Requires: puppet-agent
+Requires: nethserver-subscription
 BuildRequires: nethserver-devtools
 
 %description
