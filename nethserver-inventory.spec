@@ -1,6 +1,6 @@
 Summary: NethServer ARDAD
 Name: nethserver-inventory
-Version: 1.0.7
+Version: 1.0.8
 Release: 1%{?dist}
 License: GPL
 Source0: %{name}-%{version}.tar.gz
@@ -28,6 +28,9 @@ rm -rf %{buildroot}
 %doc LICENSE
 
 %changelog
+* Mon Nov 26 2018 Davide Principi <davide.principi@nethesis.it> - 1.0.8-1
+- New firmware fact - NethServer/nethserver-subscription#17 
+
 * Tue Apr 17 2018 Giacomo Sanchietti <giacomo.sanchietti@nethesis.it> - 1.0.7-1
 - Inventory: do not send products fact - Nethesis/dev#5379
 
